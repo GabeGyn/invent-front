@@ -1,0 +1,126 @@
+<div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-4 md:items-center md:gap-8">
+      
+      <div class="md:col-span-1">
+        <div class="max-w-lg md:max-w-none">
+            <form [formGroup]="dataForm" (ngSubmit)="inserirRegistro()">
+                <label for="nome">
+                    <span class="text-sm font-medium text-gray-700"> Nome </span>
+
+                    <input
+                    type="text"
+                    id="nome"
+                    formControlName="nome"
+                    class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"
+                    />
+                </label>
+                @if (dataForm.controls.nome.invalid && (dataForm.controls.nome.dirty || dataForm.controls.nome.touched)) {
+                    @if (dataForm.controls.nome.errors?.['required']) {
+                        <p class="mt-2 text-xs text-red-700">
+                            Nome é obrigatorio.
+                        </p>
+                    }  
+                }
+                
+                <label for="tipo">
+                    <span class="text-sm font-medium text-gray-700"> Tipo </span>
+
+                    <input
+                    type="text"
+                    id="tipo"
+                    formControlName="tipo"
+                    class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"
+                    />
+                </label>
+                @if (dataForm.controls.tipo.invalid && (dataForm.controls.tipo.dirty || dataForm.controls.tipo.touched)) {
+                    @if (dataForm.controls.tipo.errors?.['required']) {
+                        <p class="mt-2 text-xs text-red-700">
+                            Tipo é obrigatorio.
+                        </p>
+                    }  
+                }
+
+                <label for="qtdeEstoque" >
+                    <span class="text-sm font-medium text-gray-700">Quantidade em estoque</span>
+                    <input
+                    type="number"
+                    id="qtdeEstoque"
+                    formControlName="qtdeEstoque"
+                    class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"
+                    />
+                </label>
+                @if (dataForm.controls.qtdeEstoque.invalid && (dataForm.controls.qtdeEstoque.dirty || dataForm.controls.qtdeEstoque.touched)) {
+                    @if (dataForm.controls.qtdeEstoque.errors?.['required']) {
+                        <p class="mt-2 text-xs text-red-700">
+                            Quantidade em estoque é obrigatorio.
+                        </p>
+                    }  
+                }
+
+                <button 
+                    class="inline-block rounded-sm border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:ring-3 focus:outline-hidden"
+                    type="button" 
+                    [hidden]="hiddeButton"
+                    (click)="atualizarRegistro()">Atualizar
+                </button>
+                <button 
+                    class="inline-block rounded-sm border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:ring-3 focus:outline-hidden"
+                    type="submit" 
+                    [hidden]="!hiddeButton"
+                    [disabled]="!dataForm.valid">Inserir
+                </button>
+            </form>
+        </div>
+      </div>
+
+      <div class="md:col-span-3">
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y-2 divide-gray-200">
+            <thead class="ltr:text-left rtl:text-right">
+              <tr class="*:font-medium *:text-gray-900">
+                <th class="px-3 py-2 whitespace-nowrap">Nome</th>
+                <th class="px-3 py-2 whitespace-nowrap">Tipo</th>
+                <th class="px-3 py-2 whitespace-nowrap">Qtde. em estoque</th>
+                <th class="px-3 py-2 whitespace-nowrap">Data de inclusão</th>
+                <th class="px-3 py-2 whitespace-nowrap">Tem estoque</th>
+                <th class="px-3 py-2 whitespace-nowrap">Ações</th>
+              </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-200">
+              @for (item of data; track $index) {
+              <tr class="*:text-gray-900 *:first:font-medium">
+                <td class="px-3 py-2 whitespace-nowrap">{{item.nome}}</td>
+                <td class="px-3 py-2 whitespace-nowrap">{{item.tipo}}</td>
+                <td class="px-3 py-2 whitespace-nowrap">{{item.qtdeEstoque}}</td>
+                <td class="px-3 py-2 whitespace-nowrap">{{item.dataInclusao}}</td>
+                <td class="px-3 py-2 whitespace-nowrap">
+                    @if (item.temEstoque==true) {
+                        Sim
+                    } @else {
+                        Não
+                    }
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap">
+                  <button
+                    class="inline-block rounded-sm border border-blue-600 bg-blue-600 px-1 py-1 text-sm font-small text-white hover:bg-transparent hover:text-blue-600 focus:ring-3 focus:outline-hidden"
+                    (click)="botaoAtualizar(item)"
+                    >
+                    Atualizar
+                  </button>
+                  <button
+                    class="inline-block rounded-sm border border-red-600 bg-red-600 px-1 py-1 text-sm font-small text-white hover:bg-transparent hover:text-red-600 focus:ring-3 focus:outline-hidden"
+                    (click)="apagarRegistro(item.id)"
+                    >
+                    Apagar
+                  </button>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
