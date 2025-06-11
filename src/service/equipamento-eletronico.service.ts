@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CustomHttpClient } from '../../shared/custom-http-client';
-import { EquipamentoEletronico } from './equipamento-eletronico';
+import { CustomHttpClient } from '../shared/custom-http-client';
 
 @Injectable({
   providedIn: 'root'

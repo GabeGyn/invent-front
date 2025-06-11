@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { EquipamentoEletronicoService } from './equipamento-eletronico.service';
 import { FormGroup, FormControl, ReactiveFormsModule } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { DatePipe } from '@angular/common';
+import { EquipamentoEletronicoService } from '../../service/equipamento-eletronico.service';
 
 @Component({
   selector: 'app-equipamento-eletronico',
