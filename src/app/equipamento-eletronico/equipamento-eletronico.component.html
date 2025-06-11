@@ -93,7 +93,7 @@
                 <td class="px-3 py-2 whitespace-nowrap">{{item.nome}}</td>
                 <td class="px-3 py-2 whitespace-nowrap">{{item.tipo}}</td>
                 <td class="px-3 py-2 whitespace-nowrap">{{item.qtdeEstoque}}</td>
-                <td class="px-3 py-2 whitespace-nowrap">{{item.dataInclusao}}</td>
+                <td class="px-3 py-2 whitespace-nowrap">{{item.dataInclusao|date: 'dd/MM/yyyy - hh:mm'}}</td>
                 <td class="px-3 py-2 whitespace-nowrap">
                     @if (item.temEstoque==true) {
                         Sim

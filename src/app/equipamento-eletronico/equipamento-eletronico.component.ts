@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { EquipamentoEletronicoService } from './equipamento-eletronico.service';
 import { FormGroup, FormControl, ReactiveFormsModule } from "@angular/forms";
 import { Validators } from "@angular/forms";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-equipamento-eletronico',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, DatePipe],
   templateUrl: './equipamento-eletronico.component.html',
   styleUrl: './equipamento-eletronico.component.css'
 })
