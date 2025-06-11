@@ -16,40 +16,7 @@ export class EquipamentoEletronicoComponent {
     this.obterRegistros();
   }
 
-  data = [
-    {
-      id:"dfs",
-      nome:"teste",
-      tipo:"eletronico",
-      qtdeEstoque:10,
-      dataInclusao:"15/10/2024",
-      temEstoque:true
-    },
-    {
-      id:"dfs",
-      nome:"teste",
-      tipo:"eletronico",
-      qtdeEstoque:10,
-      dataInclusao:"15/10/2024",
-      temEstoque:true
-    },
-    { 
-      id:"dfs",
-      nome:"teste",
-      tipo:"eletronico",
-      qtdeEstoque:10,
-      dataInclusao:"15/10/2024",
-      temEstoque:true
-    },
-    { 
-      id:"dfs",
-      nome:"teste",
-      tipo:"eletronico",
-      qtdeEstoque:10,
-      dataInclusao:"15/10/2024",
-      temEstoque:true
-    }
-  ]
+  data: any;
 
   dataForm = new FormGroup({
     id: new FormControl(""),
@@ -57,12 +24,11 @@ export class EquipamentoEletronicoComponent {
     tipo: new FormControl("", [Validators.required]),
     qtdeEstoque: new FormControl<Number>(0, [Validators.required]),
   });
-
+  
   hiddeButton: boolean = true;
 
   botaoAtualizar(data: any) {
     this.hiddeButton = false;
-    console.log(data)
     this.dataForm.patchValue(data);
   }
 
@@ -73,21 +39,29 @@ export class EquipamentoEletronicoComponent {
   }
 
   inserirRegistro() {
-    this.equipamentoEletronicoService.inserirRegistro(this.dataForm.value).subscribe((ret) => {
+    let data = {
+      nome: this.dataForm.value.nome,
+      tipo: this.dataForm.value.tipo,
+      qtdeEstoque: this.dataForm.value.qtdeEstoque
+    };
+
+    this.equipamentoEletronicoService.inserirRegistro(data).subscribe((ret) => {
+      this.dataForm.reset();
       this.obterRegistros();
-    })
+    });
   }
 
   atualizarRegistro() {
     this.hiddeButton = true;
     this.equipamentoEletronicoService.atualizarRegistros(this.dataForm.value).subscribe((ret) => {
+      this.dataForm.reset();
       this.obterRegistros();
-    })
+    });
   }
 
   apagarRegistro(id: string) {
     this.equipamentoEletronicoService.apagarRegistro(id).subscribe((ret) => {
       this.obterRegistros();
-    })
+    });
   }
 }

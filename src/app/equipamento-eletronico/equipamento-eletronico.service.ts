@@ -11,18 +11,18 @@ export class EquipamentoEletronicoService {
   constructor(private client: CustomHttpClient) { }
 
   obterRegistro(): Observable<any[]> {
-    return this.client.get('/equipamento_eletronico');
+    return this.client.get('/api/equipamentoeletronico/');
   }
 
   inserirRegistro(data: any): Observable<any> {
-    return this.client.post('/equipamento_eletronico/', data)
+    return this.client.post('/api/equipamentoeletronico/', data)
   }
 
   atualizarRegistros(data: any): Observable<any> {
-    return this.client.put('/equipamento_eletronico/' + data.id, data)
+    return this.client.put('/api/equipamentoeletronico/'+data.id, data)
   }
     
   apagarRegistro(id: string): Observable<any> {
-    return this.client.delete('/equipamento_eletronico/' + id)
+    return this.client.delete('/api/equipamentoeletronico/' + id)
   }
 }
